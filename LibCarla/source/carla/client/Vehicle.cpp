@@ -96,5 +96,9 @@ namespace client {
     GetEpisode().Lock()->UseCarSimRoad(*this, enabled);
   }
 
+  rpc::VehicleWheelState Vehicle::GetWheelState() const{
+    return GetEpisode().Lock()->GetVehicleWheelState(*this);
+  }
+
 } // namespace client
 } // namespace carla

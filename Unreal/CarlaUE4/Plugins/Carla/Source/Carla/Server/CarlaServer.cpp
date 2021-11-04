@@ -43,6 +43,7 @@
 #include <carla/rpc/VehiclePhysicsControl.h>
 #include <carla/rpc/VehicleLightState.h>
 #include <carla/rpc/VehicleLightStateList.h>
+#include "carla/rpc/VehicleWheelState.h"
 #include <carla/rpc/WalkerBoneControl.h>
 #include <carla/rpc/WalkerControl.h>
 #include <carla/rpc/WeatherParameters.h>
@@ -860,6 +861,24 @@ void FCarlaServer::FPimpl::BindActions()
     }
 
     return cr::VehicleLightState(Vehicle->GetVehicleLightState());
+  };
+
+  BIND_SYNC(get_vehicle_wheel_state) << [this](
+      cr::ActorId ActorId) -> R<cr::VehicleWheelState>
+  {
+    REQUIRE_CARLA_EPISODE();
+    auto ActorView = Episode->FindActor(ActorId);
+    if (!ActorView.IsValid())
+    {
+      RESPOND_ERROR("unable to get actor wheel state: actor not found");
+    }
+    auto Vehicle = Cast<ACarlaWheeledVehicle>(ActorView.GetActor());
+    if (Vehicle == nullptr)
+    {
+      RESPOND_ERROR("unable to get actor wheel state: actor is not a vehicle");
+    }
+
+    return cr::VehicleWheelState(Vehicle->GetVehicleWheelState());
   };
 
   BIND_SYNC(apply_physics_control) << [this](

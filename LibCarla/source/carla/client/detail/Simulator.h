@@ -23,6 +23,7 @@
 #include "carla/profiler/LifetimeProfiled.h"
 #include "carla/rpc/TrafficLightState.h"
 #include "carla/rpc/VehicleLightStateList.h"
+#include "carla/rpc/VehicleWheelState.h"
 #include "carla/rpc/LabelledPoint.h"
 
 #include <boost/optional.hpp>
@@ -236,6 +237,10 @@ namespace detail {
       return _client.GetVehicleLightState(vehicle.GetId());
     }
 
+    rpc::VehicleWheelState GetVehicleWheelState(const Vehicle &vehicle) const {
+      return _client.GetVehicleWheelState(vehicle.GetId());
+    }
+    
     /// Returns all the BBs of all the elements of the level
     std::vector<geom::BoundingBox> GetLevelBBs(uint8_t queried_tag) const {
       return _client.GetLevelBBs(queried_tag);

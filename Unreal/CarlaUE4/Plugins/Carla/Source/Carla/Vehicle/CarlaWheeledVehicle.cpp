@@ -418,6 +418,19 @@ FVehicleLightState ACarlaWheeledVehicle::GetVehicleLightState() const
   return InputControl.LightState;
 }
 
+FVehicleWheelState ACarlaWheeledVehicle::GetVehicleWheelState() const
+{
+  UWheeledVehicleMovementComponent4W *Vehicle4W = Cast<UWheeledVehicleMovementComponent4W>(
+      GetVehicleMovement());
+  check(Vehicle4W != nullptr);
+  FVehicleWheelState state;
+  state.RotationFL = Vehicle4W->PVehicle->mWheelsDynData.getWheelRotationSpeed(0); 
+  state.RotationFR = Vehicle4W->PVehicle->mWheelsDynData.getWheelRotationSpeed(1); 
+  state.RotationBL = Vehicle4W->PVehicle->mWheelsDynData.getWheelRotationSpeed(2); 
+  state.RotationBR = Vehicle4W->PVehicle->mWheelsDynData.getWheelRotationSpeed(3); 
+  return state;
+}
+
 void ACarlaWheeledVehicle::ApplyVehiclePhysicsControl(const FVehiclePhysicsControl &PhysicsControl)
 {
   UWheeledVehicleMovementComponent4W *Vehicle4W = Cast<UWheeledVehicleMovementComponent4W>(

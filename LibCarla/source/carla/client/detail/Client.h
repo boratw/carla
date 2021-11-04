@@ -29,6 +29,7 @@
 #include "carla/rpc/WeatherParameters.h"
 #include "carla/rpc/OpendriveGenerationParameters.h"
 #include "carla/rpc/VehicleLightStateList.h"
+#include "carla/rpc/VehicleWheelState.h"
 
 #include <functional>
 #include <memory>
@@ -125,6 +126,8 @@ namespace detail {
     rpc::VehiclePhysicsControl GetVehiclePhysicsControl(rpc::ActorId vehicle) const;
 
     rpc::VehicleLightState GetVehicleLightState(rpc::ActorId vehicle) const;
+    
+    rpc::VehicleWheelState GetVehicleWheelState(rpc::ActorId vehicle) const;
 
     void ApplyPhysicsControlToVehicle(
         rpc::ActorId vehicle,

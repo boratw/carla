@@ -11,6 +11,7 @@
 #include "Vehicle/CarlaWheeledVehicleState.h"
 #include "Vehicle/VehicleControl.h"
 #include "Vehicle/VehicleLightState.h"
+#include "Vehicle/VehicleWheelState.h"
 #include "Vehicle/VehicleInputPriority.h"
 #include "Vehicle/VehiclePhysicsControl.h"
 #include "VehicleVelocityControl.h"
@@ -121,6 +122,9 @@ public:
 
   UFUNCTION(Category = "CARLA Wheeled Vehicle", BlueprintCallable)
   FVehicleLightState GetVehicleLightState() const;
+
+  UFUNCTION(Category = "CARLA Wheeled Vehicle", BlueprintCallable)
+  FVehicleWheelState GetVehicleWheelState() const;
 
   void ApplyVehiclePhysicsControl(const FVehiclePhysicsControl &PhysicsControl);
 

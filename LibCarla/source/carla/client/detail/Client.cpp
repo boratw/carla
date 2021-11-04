@@ -16,6 +16,7 @@
 #include "carla/rpc/Response.h"
 #include "carla/rpc/VehicleControl.h"
 #include "carla/rpc/VehicleLightState.h"
+#include "carla/rpc/VehicleWheelState.h"
 #include "carla/rpc/WalkerBoneControl.h"
 #include "carla/rpc/WalkerControl.h"
 #include "carla/streaming/Client.h"
@@ -214,6 +215,11 @@ namespace detail {
   rpc::VehicleLightState Client::GetVehicleLightState(
       rpc::ActorId vehicle) const {
     return _pimpl->CallAndWait<carla::rpc::VehicleLightState>("get_vehicle_light_state", vehicle);
+  }
+
+  rpc::VehicleWheelState Client::GetVehicleWheelState(
+      rpc::ActorId vehicle) const {
+    return _pimpl->CallAndWait<carla::rpc::VehicleWheelState>("get_vehicle_wheel_state", vehicle);
   }
 
   void Client::ApplyPhysicsControlToVehicle(

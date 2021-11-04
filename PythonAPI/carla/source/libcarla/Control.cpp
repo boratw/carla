@@ -10,6 +10,7 @@
 #include <carla/rpc/WheelPhysicsControl.h>
 #include <carla/rpc/WalkerControl.h>
 #include <carla/rpc/WalkerBoneControl.h>
+#include "carla/rpc/VehicleWheelState.h"
 
 #include <ostream>
 
@@ -94,6 +95,15 @@ namespace rpc {
     << ", use_sweep_wheel_collision=" << control.use_sweep_wheel_collision << ')';
     return out;
   }
+
+  std::ostream &operator<<(std::ostream &out, const VehicleWheelState &state) {
+    out << "VehicleWheelState(rotation_fl=" << std::to_string(state.rotation_fl)
+        << ", rotation_fr=" << std::to_string(state.rotation_fr)
+        << ", rotation_bl=" << std::to_string(state.rotation_bl)
+        << ", rotation_br=" << std::to_string(state.rotation_br) << ')';
+    return out;
+  }
+
 } // namespace rpc
 } // namespace carla
 
@@ -393,6 +403,21 @@ void export_control() {
     .def_readwrite("use_sweep_wheel_collision", &cr::VehiclePhysicsControl::use_sweep_wheel_collision)
     .def("__eq__", &cr::VehiclePhysicsControl::operator==)
     .def("__ne__", &cr::VehiclePhysicsControl::operator!=)
+    .def(self_ns::str(self_ns::self))
+  ;
+
+  class_<cr::VehicleWheelState>("VehicleWheelState", no_init)
+    .def(init<float, float, float, float>(
+        (arg("rotation_fl")=0.0f,
+         arg("rotation_fr")=0.0f,
+         arg("rotation_bl")=0.0f,
+         arg("rotation_br")=0.0f)))
+    .def_readwrite("rotation_fl", &cr::VehicleWheelState::rotation_fl)
+    .def_readwrite("rotation_fr", &cr::VehicleWheelState::rotation_fr)
+    .def_readwrite("rotation_bl", &cr::VehicleWheelState::rotation_bl)
+    .def_readwrite("rotation_br", &cr::VehicleWheelState::rotation_br)
+    .def("__eq__", &cr::VehicleWheelState::operator==)
+    .def("__ne__", &cr::VehicleWheelState::operator!=)
     .def(self_ns::str(self_ns::self))
   ;
 }

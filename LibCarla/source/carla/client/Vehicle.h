@@ -11,6 +11,7 @@
 #include "carla/rpc/VehicleLightState.h"
 #include "carla/rpc/VehicleControl.h"
 #include "carla/rpc/VehiclePhysicsControl.h"
+#include "carla/rpc/VehicleWheelState.h"
 #include "carla/trafficmanager/TrafficManager.h"
 
 using carla::traffic_manager::constants::Networking::TM_DEFAULT_PORT;
@@ -92,6 +93,9 @@ namespace client {
 
     /// Enables the use of CarSim internal road definition instead of unreal's
     void UseCarSimRoad(bool enabled);
+
+    /// Return the state of the wheels
+    rpc::VehicleWheelState GetWheelState() const;
 
   private:
 
