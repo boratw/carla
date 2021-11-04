@@ -27,7 +27,15 @@ namespace rpc {
         << ", hand_brake=" << boolalpha(control.hand_brake)
         << ", reverse=" << boolalpha(control.reverse)
         << ", manual_gear_shift=" << boolalpha(control.manual_gear_shift)
-        << ", gear=" << std::to_string(control.gear) << ')';
+        << ", gear=" << std::to_string(control.gear)
+        << ", throttle_fl=" << std::to_string(control.throttle_fl)
+        << ", throttle_fr=" << std::to_string(control.throttle_fr)
+        << ", throttle_bl=" << std::to_string(control.throttle_bl)
+        << ", throttle_br=" << std::to_string(control.throttle_br)
+        << ", brake_fl=" << std::to_string(control.brake_fl)
+        << ", brake_fr=" << std::to_string(control.brake_fr)
+        << ", brake_bl=" << std::to_string(control.brake_bl)
+        << ", brake_br=" << std::to_string(control.brake_br) << ')';
     return out;
   }
 
@@ -283,6 +291,14 @@ void export_control() {
     .def_readwrite("reverse", &cr::VehicleControl::reverse)
     .def_readwrite("manual_gear_shift", &cr::VehicleControl::manual_gear_shift)
     .def_readwrite("gear", &cr::VehicleControl::gear)
+    .def_readwrite("throttle_fl", &cr::VehicleControl::throttle_fl)
+    .def_readwrite("throttle_fr", &cr::VehicleControl::throttle_fr)
+    .def_readwrite("throttle_bl", &cr::VehicleControl::throttle_bl)
+    .def_readwrite("throttle_br", &cr::VehicleControl::throttle_br)
+    .def_readwrite("brake_fl", &cr::VehicleControl::brake_fl)
+    .def_readwrite("brake_fr", &cr::VehicleControl::brake_fr)
+    .def_readwrite("brake_bl", &cr::VehicleControl::brake_bl)
+    .def_readwrite("brake_br", &cr::VehicleControl::brake_br)
     .def("__eq__", &cr::VehicleControl::operator==)
     .def("__ne__", &cr::VehicleControl::operator!=)
     .def(self_ns::str(self_ns::self))
