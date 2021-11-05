@@ -15,7 +15,7 @@ LAUNCH_UE4_EDITOR=false
 USE_CARSIM=false
 
 GDB=
-RHI="-vulcan"
+#RHI="-vulcan"
 RHI="-opengl"
 
 OPTS=`getopt -o h --long help,build,rebuild,launch,clean,hard-clean,gdb,opengl,carsim -n 'parse-options' -- "$@"`
